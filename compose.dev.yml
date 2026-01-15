@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: chat_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: chat
+      POSTGRES_USER: chat
+      POSTGRES_PASSWORD: chat
+    ports:
+      - "5432:5432"
+    volumes:
+      - chat_postgres_data:/var/lib/postgresql/data
+
+  valkey:
+    image: docker.io/valkey/valkey:8-alpine
+    container_name: chat_valkey
+    restart: unless-stopped
+    command: valkey-server --save 30 1 --loglevel warning
+    ports:
+      - "6379:6379"
+    volumes:
+      - chat_valkey-data:/data
+
+volumes:
+  chat_postgres_data:
+  chat_valkey-data:

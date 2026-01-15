@@ -1,0 +1,306 @@
+@utility section {
+    @apply py-5;
+}
+
+@utility article {
+    @apply mx-auto max-w-[65ch] px-2 py-4 pb-10 transition-[max-width] duration-500 ease-in-out md:px-4 lg:max-w-[80ch] [&_img]:mx-auto [&_img]:max-h-[50vh] [&_img]:w-auto [&_img]:rounded-lg;
+}
+
+@utility container {
+    @apply mx-auto max-w-480 px-4;
+}
+
+@utility paper {
+    @apply rounded-2xl bg-white/30 dark:bg-zinc-900/30 backdrop-blur-md shadow-xs border border-white/20 dark:border-zinc-700/25 transition-all duration-200;
+}
+
+@utility paper-highlighted {
+    @apply paper shadow-sm;
+}
+
+@utility btn-base {
+    @apply inline-flex cursor-pointer items-center gap-1 rounded px-2 py-1 text-xs transition-all duration-200 backdrop-blur-md;
+}
+
+@utility btn-simple {
+    @apply btn-base bg-white/30 text-zinc-700 border border-white/20 dark:bg-zinc-900/30 dark:text-zinc-300 dark:border-zinc-700/30 hover:bg-white/50 dark:hover:bg-zinc-800/50 dark:hover:border-zinc-500/50 dark:hover:shadow-[0_0_12px_rgba(255,255,255,0.08)] active:bg-white/60 active:text-zinc-900 dark:active:bg-zinc-700/60 dark:active:text-zinc-100;
+}
+
+@utility btn-primary {
+    @apply btn-base bg-black/70 text-white border border-black/30 dark:bg-transparent dark:text-white dark:border-white/60 hover:bg-black/80 dark:hover:bg-white/10 dark:hover:border-white/80 dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] active:bg-black active:text-white dark:active:bg-white dark:active:text-black;
+}
+
+@utility btn-secondary {
+    @apply btn-base bg-zinc-200/30 text-zinc-700 border border-zinc-300/30 dark:bg-zinc-800/30 dark:text-zinc-300 dark:border-zinc-600/30 hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50 dark:hover:border-zinc-500/50 dark:hover:shadow-[0_0_12px_rgba(255,255,255,0.06)] active:bg-white/60 active:text-black dark:active:bg-zinc-800/60 dark:active:text-white;
+}
+
+@utility btn-success {
+    @apply btn-base bg-white/30 text-green-600 border border-green-500/30 dark:bg-zinc-900/30 dark:text-green-400 dark:border-green-500/30 hover:bg-green-50/50 hover:border-green-500/50 dark:hover:bg-green-950/40 dark:hover:border-green-400/50 dark:hover:shadow-[0_0_15px_rgba(74,222,128,0.15)] active:bg-green-600 active:text-white dark:active:bg-green-500 dark:active:text-black;
+}
+
+@utility btn-danger {
+    @apply btn-base bg-white/30 text-red-600 border border-red-500/30 dark:bg-zinc-900/30 dark:text-red-400 dark:border-red-500/30 hover:bg-red-50/50 hover:border-red-500/50 dark:hover:bg-red-950/40 dark:hover:border-red-400/50 dark:hover:shadow-[0_0_15px_rgba(248,113,113,0.15)] active:bg-red-600 active:text-white dark:active:bg-red-500 dark:active:text-black;
+}
+
+@utility input-base {
+    @apply rounded p-2 text-sm bg-white/35 text-zinc-700 border border-white/20 backdrop-blur-2xl focus:border-black/40 focus:bg-white/45 focus-within:border-black/40 focus-within:bg-white/45 focus-visible:outline-none dark:bg-zinc-900/35 dark:text-zinc-300 dark:border-zinc-700/25 dark:focus:border-white/40 dark:focus:bg-zinc-800/45 dark:focus-within:border-white/40 dark:focus-within:bg-zinc-800/45 dark:focus:shadow-[0_0_12px_rgba(255,255,255,0.08)] dark:focus-within:shadow-[0_0_12px_rgba(255,255,255,0.08)];
+}
+
+@utility input-border {
+    @apply input-base;
+}
+
+@utility input-subtle {
+    @apply input-base bg-zinc-100/35 dark:bg-zinc-900/35;
+}
+
+@utility input-simple {
+    @apply input-base;
+}
+
+@utility icon-btn {
+    @apply btn-simple h-9 w-9 justify-center p-2;
+}
+
+/* ==========================
+ * Text Utilities
+ * ========================== */
+
+@utility text-primary {
+    @apply text-zinc-900 dark:text-zinc-100;
+}
+
+@utility text-secondary {
+    @apply text-zinc-700 dark:text-zinc-300;
+}
+
+@utility text-dimmed {
+    @apply text-zinc-500 dark:text-zinc-500;
+}
+
+@utility text-label {
+    @apply text-sm font-medium text-zinc-700 dark:text-zinc-300;
+}
+
+@utility hover-text {
+    @apply text-zinc-400 hover:text-zinc-700 dark:text-zinc-600 dark:hover:text-zinc-300;
+}
+
+@utility hover-shadow {
+    @apply hover:shadow-md dark:hover:shadow-none;
+}
+
+@utility bg-dark {
+    @apply bg-[var(--color-dark)];
+}
+
+@utility no-scrollbar {
+    ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari und Opera */
+    }
+
+    -ms-overflow-style: none; /* IE und Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+@utility ellipsis {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+@utility animate-cursor {
+    animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@utility shimmer {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -50%;
+        background: linear-gradient(
+            115deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.25) 50%,
+            transparent 100%
+        );
+        animation: shimmer 5s ease-in-out infinite;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Make solid-island transparent in layout */
+solid-island {
+    display: contents;
+}
+
+/* Popover positioning */
+[popover] {
+    margin: 0;
+    inset: unset;
+    background: transparent;
+    border: none;
+}
+
+[popover]:popover-open {
+    @starting-style {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+[popover] {
+    transition:
+        opacity 0.2s,
+        transform 0.2s,
+        overlay 0.2s allow-discrete,
+        display 0.2s allow-discrete;
+}
+
+/* ==========================
+ * Info Blocks
+ * ========================== */
+
+@utility info-block {
+    @apply flex items-start gap-2 rounded ring ring-inset px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap;
+}
+
+@utility info-block-note {
+    @apply info-block bg-zinc-50 ring-zinc-300 text-zinc-800 dark:bg-zinc-950 dark:ring-zinc-700 dark:text-zinc-300;
+}
+
+@utility info-block-info {
+    @apply info-block bg-blue-50 ring-blue-400 text-blue-800 dark:bg-blue-950 dark:ring-blue-600 dark:text-blue-300;
+}
+
+@utility info-block-success {
+    @apply info-block bg-green-50 ring-green-400 text-green-800 dark:bg-green-950 dark:ring-green-600 dark:text-green-300;
+}
+
+@utility info-block-warning {
+    @apply info-block bg-orange-50 ring-orange-400 text-orange-800 dark:bg-orange-950 dark:ring-orange-600 dark:text-orange-300;
+}
+
+@utility info-block-danger {
+    @apply info-block bg-red-50 ring-red-400 text-red-800 dark:bg-red-950 dark:ring-red-600 dark:text-red-300;
+}
+
+@utility scrollbar {
+    scrollbar-color: theme(colors.zinc.400) transparent;
+    scrollbar-width: thin;
+    @media (prefers-color-scheme: dark) {
+        scrollbar-color: theme(colors.zinc.600) transparent;
+    }
+    &::-webkit-scrollbar {
+        @apply w-2 h-2;
+    }
+    &::-webkit-scrollbar-track {
+        @apply rounded-full bg-transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        @apply bg-zinc-400 dark:bg-zinc-600 rounded-full border-0;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        @apply bg-zinc-500 dark:bg-zinc-500;
+    }
+    &::-webkit-scrollbar-corner {
+        @apply bg-transparent;
+    }
+}
+
+/* User menu dropdown anchor positioning */
+.user-menu-dropdown {
+    position-anchor: --avatar-button;
+
+    /* Mobile: below the avatar, right-aligned */
+    top: anchor(bottom);
+    left: auto;
+    right: 0;
+    margin-top: 8px;
+    margin-right: 1rem;
+
+    /* Desktop: next to the avatar on the right */
+    @media (min-width: 640px) {
+        top: auto;
+        right: auto;
+        bottom: anchor(bottom);
+        left: anchor(right);
+        margin-top: 0;
+        margin-right: 0;
+        margin-left: 8px;
+        margin-bottom: 8px;
+    }
+}
+
+/* ==========================
+ * Prose Styling (for legal pages)
+ * ========================== */
+
+.prose {
+    @apply text-zinc-900 dark:text-zinc-100;
+
+    h1 {
+        @apply text-3xl font-bold mb-4 mt-8 first:mt-0 text-zinc-900 dark:text-zinc-100;
+    }
+
+    h2 {
+        @apply text-2xl font-bold mb-3 mt-6 text-zinc-900 dark:text-zinc-100;
+    }
+
+    h3 {
+        @apply text-xl font-semibold mb-2 mt-4 text-zinc-900 dark:text-zinc-100;
+    }
+
+    p {
+        @apply mb-4 leading-7;
+    }
+
+    ul,
+    ol {
+        @apply mb-4 ml-6 space-y-2;
+    }
+
+    ul {
+        @apply list-disc;
+    }
+
+    ol {
+        @apply list-decimal;
+    }
+
+    li {
+        @apply leading-7;
+    }
+
+    a {
+        @apply text-blue-600 hover:text-blue-700 underline dark:text-blue-400 dark:hover:text-blue-300;
+    }
+
+    strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+
+    hr {
+        @apply my-8 border-zinc-300 dark:border-zinc-700;
+    }
+}

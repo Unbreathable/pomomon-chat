@@ -1,0 +1,44 @@
+{
+  "name": "ssr-example",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development bun --watch --preload=./scripts/preload.ts run src/app.tsx",
+    "build": "bun run scripts/build.ts app.tsx",
+    "serve": "NODE_ENV=production bun run dist/app.js",
+    "migrate": "bun --sql-preconnect src/backend/migrate.ts"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/bun": "latest",
+    "@types/sanitize-html": "^2.16.0",
+    "babel-preset-solid": "^1.9.10",
+    "bun-plugin-tailwind": "^0.1.2",
+    "tailwindcss": "^4.1.18"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "@hono/standard-validator": "^0.2.1",
+    "@hono/swagger-ui": "^0.5.3",
+    "@scalar/hono-api-reference": "^0.9.32",
+    "@scalar/openapi-to-markdown": "^0.3.19",
+    "@tabler/icons-webfont": "^3.36.1",
+    "@valentinkolb/ssr": "^0.5.1",
+    "dayjs": "^1.11.19",
+    "hono": "^4.11.1",
+    "hono-openapi": "^1.1.2",
+    "lean-qr": "^2.7.1",
+    "marked": "^17.0.1",
+    "mime": "^4.1.0",
+    "sanitize-html": "^2.17.0",
+    "sharp": "^0.34.5",
+    "solid-js": "^1.9.10",
+    "zod": "^4.3.4"
+  }
+}

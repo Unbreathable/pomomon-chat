@@ -1,0 +1,11 @@
+_ssr
+dist
+node_modules
+LICENSE
+compose.dev.yml
+.env
+.DS_Store
+.gitignore
+Dockerfile
+.dockerignore
+README.md

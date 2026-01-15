@@ -16,13 +16,14 @@ services:
   # ===========================================================================
   chat:
     image: ghcr.io/valentinkolb/chat:latest
+    platform: linux/amd64
     container_name: chat_app
     restart: unless-stopped
     depends_on:
       postgres:
-        condition: service_healthy
+        condition: service_started
       valkey:
-        condition: service_healthy
+        condition: service_started
     environment:
       NODE_ENV: production
       PORT: 3000
@@ -44,8 +45,8 @@ services:
     expose:
       - "3000"
     # Uncomment to expose directly (not recommended, use reverse proxy instead)
-    # ports:
-    #   - "3000:3000"
+    ports:
+      - "3000:3000"
 
   # ===========================================================================
   # PostgreSQL Database
@@ -59,7 +60,7 @@ services:
       POSTGRES_USER: chat
       POSTGRES_PASSWORD: CHANGE_ME_DB_PASSWORD # Must match BUN_SQL_URL
     volumes:
-      - chat_postgres_data:/var/lib/postgresql/data
+      - postgres_data_chat:/var/lib/postgresql/data
     networks:
       - chat_internal
     # Do not expose to host in production
@@ -75,7 +76,7 @@ services:
     restart: unless-stopped
     command: valkey-server --save 60 1 --loglevel warning --maxmemory 128mb --maxmemory-policy allkeys-lru
     volumes:
-      - chat_valkey_data:/data
+      - valkey_data_chat:/data
     networks:
       - chat_internal
     # Do not expose to host in production
@@ -86,19 +87,16 @@ services:
 # Volumes
 # =============================================================================
 volumes:
-  chat_postgres_data:
-    name: chat_postgres_data
-  chat_valkey_data:
-    name: chat_valkey_data
+  postgres_data_chat:
+  valkey_data_chat:
 
 # =============================================================================
 # Networks
 # =============================================================================
 networks:
-  # Internal network for service communication (not exposed)
+  # Internal network for service communication
   chat_internal:
     name: chat_internal
-    internal: true
   # External network for reverse proxy connection
   chat_external:
     name: chat_external

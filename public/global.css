@@ -2198,6 +2198,10 @@
     display: block;
   }
 
+  .contents {
+    display: contents;
+  }
+
   .flex {
     display: flex;
   }
@@ -25699,25 +25703,6 @@ solid-island {
 
 [popover] {
   transition: opacity .2s, transform .2s, overlay .2s allow-discrete, display .2s allow-discrete;
-}
-
-.user-menu-dropdown {
-  position-anchor: --avatar-button;
-  top: anchor(bottom);
-  margin-top: 8px;
-  margin-right: 1rem;
-  left: auto;
-  right: 0;
-}
-
-@media (min-width: 640px) {
-  .user-menu-dropdown {
-    top: auto;
-    right: auto;
-    bottom: anchor(bottom);
-    left: anchor(right);
-    margin: 0 0 8px 8px;
-  }
 }
 
 .prose {

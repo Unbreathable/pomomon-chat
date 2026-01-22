@@ -228,30 +228,6 @@ solid-island {
     }
 }
 
-/* User menu dropdown anchor positioning */
-.user-menu-dropdown {
-    position-anchor: --avatar-button;
-
-    /* Mobile: below the avatar, right-aligned */
-    top: anchor(bottom);
-    left: auto;
-    right: 0;
-    margin-top: 8px;
-    margin-right: 1rem;
-
-    /* Desktop: next to the avatar on the right */
-    @media (min-width: 640px) {
-        top: auto;
-        right: auto;
-        bottom: anchor(bottom);
-        left: anchor(right);
-        margin-top: 0;
-        margin-right: 0;
-        margin-left: 8px;
-        margin-bottom: 8px;
-    }
-}
-
 /* ==========================
  * Prose Styling (for legal pages)
  * ========================== */

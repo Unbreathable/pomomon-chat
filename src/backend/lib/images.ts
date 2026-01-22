@@ -27,8 +27,8 @@ export const generateFallback = async (id: string, text: string): Promise<Buffer
   const svg = `
     <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
       <rect width="128" height="128" fill="${color}"/>
-      <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
-            font-family="monospace, sans-serif"
+      <text x="50%" y="50%" dy="0.38em" text-anchor="middle"
+            font-family="'JetBrains Mono', monospace"
             font-size="56" font-weight="600" fill="white">
         ${initials}
       </text>
@@ -47,6 +47,6 @@ export const webpResponse = (data: Buffer): Response =>
   new Response(new Uint8Array(data), {
     headers: {
       "Content-Type": "image/webp",
-      "Cache-Control": "public, max-age=3600",
+      "Cache-Control": "no-cache",
     },
   });

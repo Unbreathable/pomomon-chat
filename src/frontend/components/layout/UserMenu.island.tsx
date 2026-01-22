@@ -112,8 +112,7 @@ export default function UserMenu(props: UserMenuProps) {
   return (
     <Dropdown
       trigger={
-        <button
-          type="button"
+        <span
           class="rounded-full hover:ring-2 hover:ring-zinc-300 dark:hover:ring-zinc-600 scale-90 sm:scale-100 transition-all"
           aria-label="User menu"
         >
@@ -122,10 +121,10 @@ export default function UserMenu(props: UserMenuProps) {
             username={props.user.username}
             class="sm:h-10 sm:w-10 h-5 w-5"
           />
-        </button>
+        </span>
       }
+      position={() => (window.innerWidth < 640 ? "bottom-right" : "top-left")}
       width="w-64"
-      className="user-menu-dropdown"
       elements={getElements()}
     />
   );

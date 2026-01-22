@@ -37,8 +37,12 @@ type DropdownItem = DropdownAction | DropdownElement | DropdownSection;
 type DropdownProps = {
   trigger: JSX.Element;
   elements: DropdownItem[];
-  position?: "bottom-right" | "bottom-left" | "top-right" | "top-left" | string;
-  id?: string;
+  position?:
+    | "bottom-right"
+    | "bottom-left"
+    | "top-right"
+    | "top-left"
+    | (() => "bottom-right" | "bottom-left" | "top-right" | "top-left");
   width?: string;
   className?: string;
 };
@@ -48,9 +52,11 @@ type DropdownProps = {
 // ==========================
 
 const POSITION_STYLES: Record<string, string> = {
-  "bottom-right": "top: anchor(bottom); right: anchor(right); margin-top: 4px;",
+  "bottom-right":
+    "top: anchor(bottom); left: anchor(right); translate: -100% 0; margin-top: 4px;",
   "bottom-left": "top: anchor(bottom); left: anchor(left); margin-top: 4px;",
-  "top-right": "bottom: anchor(top); right: anchor(right); margin-bottom: 4px;",
+  "top-right":
+    "bottom: anchor(top); left: anchor(right); translate: -100% 0; margin-bottom: 4px;",
   "top-left": "bottom: anchor(top); left: anchor(left); margin-bottom: 4px;",
 };
 
@@ -61,18 +67,22 @@ const ITEM_BASE_CLASSES =
 // Component
 // ==========================
 
-/** Accessible dropdown menu with popover positioning. Supports both click actions and links. */
+/** Accessible dropdown menu with popover light-dismiss and CSS anchor positioning. */
 export default function Dropdown(props: DropdownProps) {
-  const id = props.id ?? crypto.randomUUID();
-  const anchor = `--dropdown-${id}`;
-  const positionStyle =
-    POSITION_STYLES[props.position ?? "bottom-right"] ??
-    props.position ??
-    POSITION_STYLES["bottom-right"];
   const width = props.width ?? "w-48";
+  const anchor = `--dd-${crypto.randomUUID()}`;
+  let triggerRef!: HTMLButtonElement;
+  let popoverRef!: HTMLDivElement;
+  let open = false;
 
-  const close = (): void => {
-    (document.getElementById(id) as HTMLElement | null)?.hidePopover();
+  const close = (): void => popoverRef?.hidePopover();
+
+  const getPositionStyle = (): string => {
+    const pos =
+      typeof props.position === "function"
+        ? props.position()
+        : (props.position ?? "bottom-right");
+    return POSITION_STYLES[pos] ?? POSITION_STYLES["bottom-right"]!;
   };
 
   const getVariantClasses = (variant?: "danger"): string =>
@@ -132,24 +142,36 @@ export default function Dropdown(props: DropdownProps) {
       <button
         type="button"
         class="inline-flex"
+        ref={triggerRef}
         style={`anchor-name: ${anchor}`}
-        popoverTarget={id}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (open) {
+            popoverRef.hidePopover();
+          } else {
+            const base = `position-anchor: ${anchor}; position: fixed; inset: unset; margin: 0;`;
+            popoverRef.setAttribute(
+              "style",
+              props.className ? base : `${base} ${getPositionStyle()}`,
+            );
+            popoverRef.showPopover();
+          }
+        }}
       >
         {props.trigger}
       </button>
 
       <div
-        id={id}
+        ref={(el) => {
+          popoverRef = el;
+          el.addEventListener("toggle", (e) => {
+            open = (e as ToggleEvent).newState === "open";
+          });
+        }}
         popover="auto"
         role="menu"
         aria-label="Dropdown menu"
         class={`${width} overflow-hidden paper p-0 border! border-zinc-300/60! dark:border-zinc-600/50! ${props.className ?? ""}`}
-        style={
-          props.className
-            ? `position-anchor: ${anchor};`
-            : `position-anchor: ${anchor}; ${positionStyle}`
-        }
       >
         {props.elements.map((item, i) =>
           "items" in item ? (

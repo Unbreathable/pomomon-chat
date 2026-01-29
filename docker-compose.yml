@@ -15,7 +15,9 @@ services:
   # Chat Application
   # ===========================================================================
   chat:
-    image: ghcr.io/valentinkolb/chat:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     platform: linux/amd64
     container_name: chat_app
     restart: unless-stopped
@@ -29,7 +31,7 @@ services:
       PORT: 80
       APP_NAME: "Chat" # Displayed in the UI
       # Format: postgres://user:password@host:port/database
-      DATABASE_URL: postgres://chat:${SERVICE_PASSWORD_POSTGRES}@postgres:5432/chat
+      DATABASE_URL: postgres://chat:${SERVICE_PASSWORD_POSTGRES:-postgres}@postgres:5432/chat
       # Format: redis://host:port
       REDIS_URL: redis://valkey:6379
       # Created on first startup if no users exist
@@ -39,11 +41,10 @@ services:
       RATE_LIMIT_PER_SECOND: 60 # requests per second per user
       MAX_BOTS_PER_USER: 5
       KLIPY_API_KEY: "" # Optional: API key for GIF search (https://klipy.com)
-    networks:
-      - chat_internal
-      - chat_external
     expose:
-      - '80'
+      - "80"
+    ports:
+      - "127.0.0.1:3000:80"
 
   # ===========================================================================
   # PostgreSQL Database
@@ -55,11 +56,9 @@ services:
     environment:
       POSTGRES_DB: chat
       POSTGRES_USER: chat
-      POSTGRES_PASSWORD: ${SERVICE_PASSWORD_POSTGRES} # Must match BUN_SQL_URL
+      POSTGRES_PASSWORD: ${SERVICE_PASSWORD_POSTGRES:-postgres} # Must match BUN_SQL_URL
     volumes:
       - postgres_data_chat:/var/lib/postgresql/data
-    networks:
-      - chat_internal
     # Do not expose to host in production
     # ports:
     #   - "5432:5432"
@@ -74,8 +73,6 @@ services:
     command: valkey-server --save 60 1 --loglevel warning --maxmemory 128mb --maxmemory-policy allkeys-lru
     volumes:
       - valkey_data_chat:/data
-    networks:
-      - chat_internal
     # Do not expose to host in production
     # ports:
     #   - "6379:6379"
@@ -86,14 +83,3 @@ services:
 volumes:
   postgres_data_chat:
   valkey_data_chat:
-
-# =============================================================================
-# Networks
-# =============================================================================
-networks:
-  # Internal network for service communication
-  chat_internal:
-    name: chat_internal
-  # External network for reverse proxy connection
-  chat_external:
-    name: chat_external

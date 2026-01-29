@@ -10,15 +10,15 @@ export const impressumPage = async (c: Context<AuthContext>) => {
         <article class="prose">
           <h1>Impressum</h1>
 
-          <h2>Angaben gemäß § 5 TMG</h2>
+          <h2>Angaben gemäß § 5 DDG</h2>
           <p>
-            Valentin Kolb
+            Julian “Unbreathable” Golenhofen
             <br />
-            Universität Ulm
+            c/o IP-Management #6901
             <br />
-            89081 Ulm
+            Ludwig-Erhard-Straße 18
             <br />
-            Deutschland
+            20459 Hamburg
           </p>
 
           <h2>Kontakt</h2>
@@ -30,9 +30,7 @@ export const impressumPage = async (c: Context<AuthContext>) => {
 
           <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
           <p>
-            Valentin Kolb
-            <br />
-            89081 Ulm
+            Julian “Unbreathable” Golenhofen
           </p>
 
           <h2>Haftungsausschluss</h2>

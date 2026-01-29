@@ -29,13 +29,15 @@ export const datenschutzPage = async (c: Context<AuthContext>) => {
           <p>
             Verantwortlicher für die Datenverarbeitung auf dieser Website ist:
             <br />
-            Valentin Kolb
+            Julian "Unbreathable" Golenhofen
             <br />
-            Universität Ulm
+            c/o IP-Management #6901
             <br />
-            89081 Ulm
+            Ludwig-Erhard-Straße 18
             <br />
-            E-Mail: valentin.kolb[at]uni-ulm.de
+            20459 Hamburg
+            <br />
+            E-Mail: legal[at]liphium.com
           </p>
 
           <h2>3. Datenerfassung auf dieser Website</h2>

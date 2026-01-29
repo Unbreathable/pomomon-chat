@@ -29,12 +29,12 @@ services:
       PORT: 3000
       APP_NAME: "Chat" # Displayed in the UI
       # Format: postgres://user:password@host:port/database
-      DATABASE_URL: postgres://chat:CHANGE_ME_DB_PASSWORD@postgres:5432/chat
+      DATABASE_URL: postgres://chat:${SERVICE_PASSWORD_POSTGRES}@postgres:5432/chat
       # Format: redis://host:port
       REDIS_URL: redis://valkey:6379
       # Created on first startup if no users exist
       INITIAL_ADMIN_USERNAME: admin
-      INITIAL_ADMIN_PASSWORD: CHANGE_ME_ADMIN_PASSWORD # CHANGE THIS!
+      INITIAL_ADMIN_PASSWORD: admin
       SESSION_EXPIRY_HOURS: 168 # 7 days
       RATE_LIMIT_PER_SECOND: 60 # requests per second per user
       MAX_BOTS_PER_USER: 5
@@ -42,9 +42,6 @@ services:
     networks:
       - chat_internal
       - chat_external
-    expose:
-      - "3000"
-    # Uncomment to expose directly (not recommended, use reverse proxy instead)
     ports:
       - "3000:3000"
 
@@ -58,7 +55,7 @@ services:
     environment:
       POSTGRES_DB: chat
       POSTGRES_USER: chat
-      POSTGRES_PASSWORD: CHANGE_ME_DB_PASSWORD # Must match BUN_SQL_URL
+      POSTGRES_PASSWORD: ${SERVICE_PASSWORD_POSTGRES} # Must match BUN_SQL_URL
     volumes:
       - postgres_data_chat:/var/lib/postgresql/data
     networks:

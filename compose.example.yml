@@ -26,7 +26,7 @@ services:
         condition: service_started
     environment:
       NODE_ENV: production
-      PORT: 3000
+      PORT: 80
       APP_NAME: "Chat" # Displayed in the UI
       # Format: postgres://user:password@host:port/database
       DATABASE_URL: postgres://chat:${SERVICE_PASSWORD_POSTGRES}@postgres:5432/chat

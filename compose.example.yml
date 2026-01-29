@@ -42,8 +42,8 @@ services:
     networks:
       - chat_internal
       - chat_external
-    ports:
-      - "3000:3000"
+    expose:
+      - '80'
 
   # ===========================================================================
   # PostgreSQL Database

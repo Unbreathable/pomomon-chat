@@ -23,7 +23,9 @@ export const impressumPage = async (c: Context<AuthContext>) => {
 
           <h2>Kontakt</h2>
           <p>
-            E-Mail: valentin-kolb[at]uni-ulm.de
+            E-Mail: legal[at]liphium.com
+            <br />
+            Telefon: 07307 2010090
             <br />
             (Bitte "[at]" durch "@" ersetzen)
           </p>

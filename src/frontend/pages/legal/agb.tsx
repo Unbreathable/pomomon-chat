@@ -85,7 +85,7 @@ export const agbPage = async (c: Context<AuthContext>) => {
             Rechtsverstößen oder Missbrauch werden die gemeldeten Inhalte nach
             Prüfung entfernt. Der betroffene Nutzer kann dazu angehört werden.
           </p>
-          <p>Meldungen bitte an: valentin.kolb[at]uni-ulm.de</p>
+          <p>Meldungen bitte an: legal[at]liphium.com</p>
 
           <h2>§ 4a Verbot der persistenten Nachrichtenspeicherung</h2>
           <p>
@@ -278,18 +278,6 @@ export const agbPage = async (c: Context<AuthContext>) => {
             </li>
           </ul>
 
-          <h3>Verbindungen</h3>
-          <ul>
-            <li>
-              Maximal <strong>eine WebSocket-Verbindung</strong> pro
-              Nutzer-Session
-            </li>
-            <li>
-              Clients sollten einen identifizierbaren{" "}
-              <strong>User-Agent Header</strong> senden (z.B. "MeinClient/1.0")
-            </li>
-          </ul>
-
           <h3>Verbotene Aktivitäten</h3>
           <ul>
             <li>
@@ -325,7 +313,7 @@ export const agbPage = async (c: Context<AuthContext>) => {
             übrigen Bestimmungen davon unberührt.
           </p>
           <p>
-            <strong>Kontakt bei Fragen:</strong> valentin.kolb[at]uni-ulm.de
+            <strong>Kontakt bei Fragen:</strong> legal[at]liphium.com
           </p>
 
           <h2>Weitere rechtliche Informationen</h2>

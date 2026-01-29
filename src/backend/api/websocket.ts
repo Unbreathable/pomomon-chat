@@ -87,29 +87,9 @@ const app = new Hono().get(
 
         // Subscribe to room and send join message (skip for bots)
         if (roomId) {
-          socket.subscribe(roomId);
+					socket.subscribe(roomId);
 
-          // Bots don't produce join/leave messages
-          if (!user.is_bot) {
-            // Save join message to database
-            const joinMessage = await messageService.create({
-              chatroomId: roomId,
-              userId: user.id,
-              createdBy: null,
-              contentType: "info",
-              content: `${user.username} joined`,
-            });
-
-            // Access already verified above, so this should always succeed
-            if ("error" in joinMessage) {
-              return sendError(ws, "Failed to send join message");
-            }
-
-            // Broadcast join to room
-            const wsMessage = { type: "message", data: joinMessage } satisfies WsServerMessage;
-            socket.publish(roomId, JSON.stringify(wsMessage));
-            sendMessage(ws, wsMessage);
-          }
+					// TODO: Replace with setting the user as online in the chat room
         }
 
         // Subscribe to unmuted rooms for notifications
@@ -174,23 +154,7 @@ const app = new Hono().get(
         // Bots don't produce join/leave messages
         if (user.is_bot) return;
 
-        const socket = ws.raw as ServerWebSocket;
-
-        // Save leave message to database
-        const leaveMessage = await messageService.create({
-          chatroomId: roomId,
-          userId: user.id,
-          createdBy: null,
-          contentType: "info",
-          content: `${user.username} left`,
-        });
-
-        // Access already verified, so this should always succeed
-        if ("error" in leaveMessage) return;
-
-        // Broadcast leave to room
-        const wsMessage = { type: "message", data: leaveMessage } satisfies WsServerMessage;
-        socket.publish(roomId, JSON.stringify(wsMessage));
+        // TODO: Set as offline in the member list
       },
     };
   }),
